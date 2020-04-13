@@ -3677,6 +3677,16 @@ div.hoverbox:hover >div.target {
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
 }
+canvas {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: auto;
+  z-index: -1;
+}
 .white-box {
   background: #fff;
 }
