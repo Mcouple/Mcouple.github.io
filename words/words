@@ -1,0 +1,89 @@
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="CET4高频单词">
+    <link rel="shortcut icon" href="#">
+    <link rel="apple-touch-icon" href="#">
+    <meta name="keywords" content="Alphabetic">
+    <link rel="dns-prefetch" href="//love.itjoker.cn">
+    <link rel="dns-prefetch" href="//recordlove2017.github.io/">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="https://love.itjoker.cn/Words/words.css" rel="stylesheet">
+    <script src="https://love.itjoker.cn/Words/http.js"></script>
+    <title>CET4 高频单词</title>
+</head>
+
+<body>
+    <script>
+    </script>
+    <header>
+        <p class="title">CET4 高频单词<br /><a href="http://love.itjoker.cn" class="copyright">Design Copyright By ITJoker
+                ©</a></p>
+    </header>
+    <main>
+
+        <div id="main">
+            <div class="ButtonList">
+                <div id="SortButton" class="button"><span>排序</span></div>
+                <div id="ReturnButton" class="button"><span>还原</span></div>
+            </div>
+            <div id="wordlist">
+            </div>
+        </div>
+    </main>
+    <script>
+        var wordsArray = new Array(693);
+        var Sort_wordsArray_en = new Array(693);
+        var Sort_wordsArray_translate = new Array(693);
+        var dic = new Array();
+        var num = 0;
+        var paramObj = {
+            httpUrl: 'https://love.itjoker.cn/Words/words.txt',
+            type: 'get',
+        }
+        httpRequest(paramObj, function(response) {
+            var temp = '',
+                word = '';
+            for (var i = 0; i < response.length; i++) {
+                if (response[i] != '\n') {
+                    temp += response[i];
+                } else {
+                    wordsArray[num] = temp;
+                    word += '<div id="' + num.toString() + '" class="word">' + temp + '</div>';
+                    num += 1;
+                    temp = '';
+                }
+            }
+            document.getElementById("wordlist").innerHTML = document.getElementById("wordlist").innerHTML + word;
+            for (var i = 0; i < wordsArray.length; i++) {
+                var temp = document.getElementById(i.toString()).innerHTML;
+                if (temp) {
+                    Sort_wordsArray_en[i] = temp.split(" ")[0].toString();
+                    Sort_wordsArray_translate[i] = temp.split(" ")[2].toString();
+                    dic[Sort_wordsArray_en[i]] = Sort_wordsArray_translate[i];
+                }
+            }
+        }, function() {
+            document.getElementById("wordlist").innerHTML = '网络异常! Network ERROR!';
+        });
+        var SortButton = document.getElementById("SortButton");
+        var ReturnButton = document.getElementById("ReturnButton");
+        SortButton.onclick = function SortEvent() {
+            Sort_wordsArray_en.sort();
+            for (var i = 0; i < Sort_wordsArray_en.length; i++) {
+                key = Sort_wordsArray_en[i];
+                document.getElementById(i.toString()).innerHTML = key + " " + dic[key];
+            }
+        }
+        ReturnButton.onclick = function ReturnEvent() {
+            for (var i = 0; i < wordsArray.length; i++) {
+                document.getElementById(i.toString()).innerHTML = wordsArray[i];
+            }
+        }
+    </script>
+</body>
+
+</html>
