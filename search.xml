@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Linux</title>
+      <link href="/2020/04/15/linux/"/>
+      <url>/2020/04/15/linux/</url>
+      
+        <content type="html"><![CDATA[<h2 id="LINUX"><a href="#LINUX" class="headerlink" title="LINUX"></a>LINUX</h2><h4 id="用漫画了解linux内核"><a href="#用漫画了解linux内核" class="headerlink" title="用漫画了解linux内核"></a>用漫画了解linux内核</h4><img src="/2020/04/15/linux/1.jpg" alt="1" style="zoom:50%;"><a id="more"></a><p>这幅漫画是以一个房子的侧方刨面图来绘画的。使用这样的一个房子来代表 Linux 内核。</p><h6 id="地基（底层）"><a href="#地基（底层）" class="headerlink" title="地基（底层）"></a><strong>地基</strong>（底层）</h6><p>作为一个房子，最重要的莫过于其地基，在这个图片里，我们也从最下面的地基开始看起：</p><p><img src="/2020/04/15/linux/2.jpg" alt="2"></p><p>地基（底层）由一排排的文件柜组成，井然有序，文件柜里放置着“文件”——电脑中的文件。左上角，有一只胸前挂着 421 号牌的小企鹅，它表示着 PID（进程 IDProcess ID） 为 421 的进程，它正在查看文件柜中的文件，这代表系统中正有一个进程在访问文件系统。在右下角有一只小狗，它是看门狗watchdog ，这代表对文件系统的监控。</p><p><img src="/2020/04/15/linux/3.jpg" alt="3"></p><p><strong>一层（地面层）</strong></p><p>看完了地基，接下来我们来看地基上面的一层，都有哪些东西。</p><p><img src="/2020/04/15/linux/4.jpg" alt="4"></p><h6 id="进程表"><a href="#进程表" class="headerlink" title="进程表"></a><strong>进程表</strong></h6><p>这一层，最引人瞩目的莫过于中间的一块垫子，众多小企鹅在围着着桌子坐着。这个垫子的区域代表进程表。</p><p>左上角有一个小企鹅，站着，仿佛在说些什么这显然是一位家长式的人物，不过看起来周围坐的那些小企鹅不是很听话——你看有好多走神、自顾自聊天的——“喂喂，说你呢，哇塞娃（171），转过身来”。它代表着 Linux 内核中的初始化（init）进程，也就是我们常说的 PID 为 1 的进程。桌子上坐的小企鹅都在等待状态wait中，等待工作任务。</p><p><img src="/2020/04/15/linux/5.jpg" alt="5"></p><p><strong>看门狗</strong></p><p>瞧瞧，垫子（进程表）两旁有两只小狗，它会监控小企鹅的状态（监控进程），当小企鹅们不听话时，它就会汪汪地叫喊起来。</p><p><img src="/2020/04/15/linux/6.jpg" alt="6"></p><h6 id="http-进程"><a href="#http-进程" class="headerlink" title="http 进程"></a><strong>http 进程</strong></h6><p>在这层的左侧，有一只号牌为 1341 的小企鹅，守在门口，门上写着 80，说明这个 PID 为 1341 的小企鹅负责接待 80 端口，也就是我们常说的 HTTP （网站）的端口。小企鹅头上有一片羽毛，这片羽毛大有来历，它是著名的 HTTP 服务器 Apache 的 Logo。喏，就是这只：</p><p><img src="/2020/04/15/linux/7.jpg" alt="7"></p><h6 id="apache-logo"><a href="#apache-logo" class="headerlink" title="apache logo"></a><strong>apache logo</strong></h6><p>向右看，我们可以看到这里仍有一扇门，门上写着 21，但是，看起来这扇门似乎年久失修，上面的门牌号都歪了，门口也没人守着。看起来这个 21 端口的 FTP 协议有点老旧了，目前用的人也比以前少了，以至于这里都没人接待了。</p><p><img src="/2020/04/15/linux/8.jpg" alt="8"></p><h6 id="无人看守的-FTP-进程"><a href="#无人看守的-FTP-进程" class="headerlink" title="无人看守的 FTP 进程"></a><strong>无人看守的 FTP 进程</strong></h6><p>而在最右侧的一个门牌号 22 的们的待遇就大为不同，居然有一只带着墨镜的小企鹅在守着，看起来好酷啊，它是黑衣人叔叔吗？为什么要这么酷的一个企鹅呢，因为 22 端口是 SSH 端口，是一个非常重要的远程连接端口，通常通过这个端口进行远程管理，所以对这个端口进来的人要仔细审查。</p><p><img src="/2020/04/15/linux/9.jpg" alt="9"></p><h6 id="SSH-守护进程"><a href="#SSH-守护进程" class="headerlink" title="SSH 守护进程"></a><strong>SSH 守护进程</strong></h6><p>它的身上写着 52，说明它是第 52 个小企鹅。</p><p><img src="/2020/04/15/linux/111.jpg" alt="111"></p><p><strong>到达文件系统</strong></p><p>在图片的左上角，有一个向下台阶。这个台阶是底层（地基）的文件系统中的，进程们可以通过这个台阶，到文件系统中去读取文件，进行操作。</p><p><img src="/2020/04/15/linux/11.jpg" alt="11"></p><h6 id="cron-任务"><a href="#cron-任务" class="headerlink" title="cron 任务"></a><strong>cron 任务</strong></h6><p>在这一层中，有一个身上写着 217 的小企鹅，他正满头大汗地看着自己的手表。这只小企鹅就是定时任务（Crontab），他会时刻关注时间，查看是否要去做某个工作。</p><p><img src="/2020/04/15/linux/113.jpg" alt="113"></p><h6 id="管道"><a href="#管道" class="headerlink" title="管道"></a><strong>管道</strong></h6><p>在图片的中部，有两个小企鹅扛着管道（PipeLine）在行走，一只小企鹅可以把自己手上的东西通过这个管道，传递给后面的小企鹅。不过怎么看起来前面这种（男？）企鹅累得满头大汗，而后面那只（女？）企鹅似乎游刃有余——喂喂，前面那个，裤子快掉了~</p><p><img src="/2020/04/15/linux/114.jpg" alt="114"></p><h6 id="Wine"><a href="#Wine" class="headerlink" title="Wine"></a><strong>Wine</strong></h6><p>在这一层还有另外的一个小企鹅，它手上拿着一杯红酒，身上写着 411，看起来有点不胜酒力。它就是红酒（Wine）小企鹅,它可以干（执行）一些来自 Windows 的任务。</p><h6 id="跃层"><a href="#跃层" class="headerlink" title="跃层"></a><strong>跃层</strong></h6><p>在一层之上，还有一个跃层，这里有很多不同的屏幕，每个屏幕上写着 TTY（这就是对外的终端）。比如说最左边 tty4 上输入了“fre”——这是想输入“freshmeat…”么 ：d ；它旁边的 tty2 和 tty3 就正常多了，看起来是比较正常的命令；tty7 显示的图形界面嗳，对，图形界面（X Window）一般就在 7 号终端；tty5 和 tty6 是空的，这表示这两个终端没人用。等等，tty1 呢？</p><p><img src="/2020/04/15/linux/115.jpg" alt="115"></p><p>tty（终端）是对外沟通的渠道之一，但是，不是每一个进程都需要 tty，某些进程可以直接通过其他途径（比如端口）来和外部进行通信，对外提供服务的，所以，这一层不是完整的一层，只是个跃层。</p><h6 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h6><p>好了，我们有落下什么吗？</p><p><img src="/2020/04/15/linux/117.jpg" alt="117"></p><p>小丑？</p><p>这小丑是谁？</p><p>GNOME进程!</p><p>转载于：<a href="https://www.toutiao.com/i6766887007181341192/?tt_from=copy_link&amp;utm_campaign=client_share&amp;timestamp=1586947157&amp;app=news_article&amp;utm_source=copy_link&amp;utm_medium=toutiao_ios&amp;req_id=2020041518391701012903509416140333&amp;group_id=6766887007181341192" target="_blank" rel="noopener">https://www.toutiao.com/i6766887007181341192/?tt_from=copy_link&amp;utm_campaign=client_share&amp;timestamp=1586947157&amp;app=news_article&amp;utm_source=copy_link&amp;utm_medium=toutiao_ios&amp;req_id=2020041518391701012903509416140333&amp;group_id=6766887007181341192</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> -Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> -Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker和K8S</title>
       <link href="/2020/04/14/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/"/>
       <url>/2020/04/14/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/</url>
